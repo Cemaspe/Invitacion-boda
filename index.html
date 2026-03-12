@@ -114,24 +114,24 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
   padding-bottom:0;
   margin-bottom:0;
 }
-.orn{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:10px;color:var(--gold);opacity:.85;margin-bottom:18px;display:block;padding:0 clamp(18px,5vw,44px);}
+.orn{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:10px;color:var(--gold);opacity:1;margin-bottom:18px;display:block;padding:0 clamp(18px,5vw,44px);}
 .names{font-family:'Cinzel',serif;font-size:clamp(22px,5vw,40px);color:#fff;letter-spacing:3px;font-weight:400;line-height:1.15;padding:0 clamp(18px,5vw,44px);}
-.orn{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:10px;color:var(--gold);opacity:.85;margin-bottom:18px;display:block;}
+.orn{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:10px;color:var(--gold);opacity:1;margin-bottom:18px;display:block;}
 .names{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,40px);color:#fff;letter-spacing:5px;font-weight:400;line-height:1.15;}
 .names em{color:var(--gold);font-style:normal;}
-.date-pill{display:inline-block;margin-top:18px;border:1px solid rgba(201,168,76,.28);padding:7px 24px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--gold);}
-.venue{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;padding:0 clamp(18px,5vw,44px);}
-.intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,.72);line-height:1.8;margin-top:18px;padding:0 clamp(18px,5vw,44px);}
+.date-pill{display:inline-block;margin-top:18px;border:2px solid rgba(201,168,76,.70);padding:7px 24px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:var(--gold);font-weight:600;}
+.venue{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.92);margin-top:8px;padding:0 clamp(18px,5vw,44px);}
+.intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,.95);line-height:1.8;margin-top:18px;padding:0 clamp(18px,5vw,44px);}
 .body{padding:36px 44px 44px;}
 @media(max-width:480px){body{padding:8px;}.card{border-radius:0;border-left:none;border-right:none;}}
-.slbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);opacity:.85;text-transform:uppercase;margin-bottom:8px;display:block;}
+.slbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);opacity:1;text-transform:uppercase;margin-bottom:8px;display:block;}
 .div{display:flex;align-items:center;gap:14px;margin:28px 0 22px;}
 .div::before,.div::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.18),transparent);}
-.div span{color:var(--gold);font-size:13px;opacity:.55;}
+.div span{color:var(--gold);font-size:13px;opacity:.85;}
 .f{margin-bottom:18px;}
-.f label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;display:block;margin-bottom:7px;}
+.f label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.98);text-transform:uppercase;display:block;margin-bottom:7px;}
 .f input,.f select,.f textarea{width:100%;background:rgba(255,255,255,.025);border:none;border-bottom:1px solid rgba(201,168,76,.2);padding:12px 14px;font-family:'Cormorant Garamond',serif;color:#fff;outline:none;transition:all .2s;appearance:none;-webkit-appearance:none;border-radius:0;}
-.f input::placeholder,.f textarea::placeholder{color:rgba(255,255,255,.25);font-style:italic;}
+.f input::placeholder,.f textarea::placeholder{color:rgba(255,255,255,.55);font-style:italic;}
 .f input:focus,.f select:focus,.f textarea:focus{border-bottom-color:var(--gold);background:rgba(201,168,76,.04);}
 .f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6L10 0z' fill='%23C9A84C'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
 .f select option{background:#1c1309;color:#fff;}
@@ -161,13 +161,13 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
   appearance:none;
   border-radius:0;
 }
-.opt-btn:active{opacity:.8;}
+.opt-btn:active{opacity:1;}
 .opt-btn.sel-yes{border-color:rgba(78,138,80,.55);background:rgba(78,138,80,.07);}
 .opt-btn.sel-no{border-color:rgba(192,57,43,.45);background:rgba(192,57,43,.06);}
 .opt-btn.sel-menu{border-color:rgba(201,168,76,.55);background:rgba(201,168,76,.07);}
 .opt-ico{font-size:26px;pointer-events:none;}
-.opt-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;text-align:center;line-height:1.4;pointer-events:none;}
-.opt-btn.sel-yes .opt-lbl,.opt-btn.sel-no .opt-lbl,.opt-btn.sel-menu .opt-lbl{color:rgba(255,255,255,.85);}
+.opt-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.9);text-transform:uppercase;text-align:center;line-height:1.4;pointer-events:none;}
+.opt-btn.sel-yes .opt-lbl,.opt-btn.sel-no .opt-lbl,.opt-btn.sel-menu .opt-lbl{color:rgba(255,255,255,.98);}
 .opt-check{position:absolute;top:8px;right:8px;width:16px;height:16px;border-radius:50%;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;transition:all .2s;pointer-events:none;}
 .opt-btn.sel-yes .opt-check{background:rgba(78,138,80,.8);border-color:transparent;color:#fff;}
 .opt-btn.sel-no .opt-check{background:rgba(192,57,43,.7);border-color:transparent;color:#fff;}
@@ -180,11 +180,11 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
   border:1px solid rgba(255,255,255,.07);
   background:rgba(255,255,255,.01);
   cursor:pointer;touch-action:manipulation;
-  font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,.7);
+  font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,.95);
   transition:all .2s;width:100%;
   -webkit-appearance:none;appearance:none;border-radius:0;
 }
-.mini-btn.sel-menu{border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.06);color:rgba(255,255,255,.85);}
+.mini-btn.sel-menu{border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.06);color:rgba(255,255,255,.98);}
 .mini-ico{font-size:14px;opacity:.6;pointer-events:none;}
 
 /* EXTRAS */
@@ -194,16 +194,16 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
 /* ACOMPAÑANTES */
 .acomp-list{display:flex;flex-direction:column;gap:14px;margin-top:4px;}
 .acomp-card{border:1px solid rgba(201,168,76,.15);background:rgba(255,255,255,.02);padding:18px 18px 14px;position:relative;animation:fadeUp .3s ease;}
-.acomp-num{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);opacity:.75;margin-bottom:12px;}
+.acomp-num{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);opacity:1;margin-bottom:12px;}
 .acomp-del{position:absolute;top:12px;right:12px;background:none;border:1px solid rgba(192,57,43,.25);color:rgba(192,57,43,.5);font-size:14px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;touch-action:manipulation;border-radius:0;}
 
 /* IBAN */
 .iban-box{margin-top:26px;border:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.025);padding:22px;text-align:center;}
-.iban-title{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);opacity:.8;margin-bottom:10px;}
-.iban-num{font-family:'Cormorant Garamond',serif;font-size:19px;color:rgba(255,255,255,.85)!important;letter-spacing:2px;cursor:pointer;transition:color .2s;display:inline-block;padding:4px 0;touch-action:manipulation;-webkit-text-decoration:none!important;text-decoration:none!important;}
-.iban-hint{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.35);margin-top:4px;}
+.iban-title{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);opacity:1;margin-bottom:10px;}
+.iban-num{font-family:'Cormorant Garamond',serif;font-size:19px;color:rgba(255,255,255,.98)!important;letter-spacing:2px;cursor:pointer;transition:color .2s;display:inline-block;padding:4px 0;touch-action:manipulation;-webkit-text-decoration:none!important;text-decoration:none!important;}
+.iban-hint{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.7);margin-top:4px;}
 .iban-num a,.s-iban-n a{color:inherit!important;text-decoration:none!important;pointer-events:none!important;}
-.iban-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.45);margin-top:10px;line-height:1.7;}
+.iban-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.8);margin-top:10px;line-height:1.7;}
 
 /* SUBMIT */
 .btn{width:100%;margin-top:28px;background:transparent;border:1px solid rgba(201,168,76,.38);color:var(--gold);font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;padding:17px 24px;cursor:pointer;touch-action:manipulation;position:relative;overflow:hidden;border-radius:0;-webkit-appearance:none;appearance:none;}
@@ -226,23 +226,23 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
 .s-ico{font-size:52px;margin-bottom:20px;display:block;animation:pop .5s .1s ease both;}
 @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
 .s-title{font-family:'Cinzel',serif;font-size:22px;color:#fff;letter-spacing:3px;margin-bottom:12px;}
-.s-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.65);line-height:1.9;}
+.s-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.92);line-height:1.9;}
 .s-gold{color:var(--gold);}
 .saved-pill{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:6px 16px;border:1px solid rgba(78,138,80,.3);font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:#81c784;}
 .s-summary{margin-top:18px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);padding:16px 18px;text-align:left;}
-.s-summary-t{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);opacity:.8;margin-bottom:10px;}
-.s-summary-row{font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(255,255,255,.88);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;gap:12px;}
+.s-summary-t{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);opacity:1;margin-bottom:10px;}
+.s-summary-row{font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(255,255,255,.98);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;gap:12px;}
 .s-summary-row:last-child{border-bottom:none;}
 .s-summary-name{color:rgba(255,255,255,.9);}
 .s-summary-menu{color:var(--gold);font-size:12px;opacity:.9;}
 .s-iban{margin-top:22px;border:1px solid rgba(201,168,76,.13);background:rgba(201,168,76,.025);padding:18px 20px;}
-.s-iban-t{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;color:rgba(255,255,255,.85);margin-bottom:7px;}
+.s-iban-t{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;color:rgba(255,255,255,.98);margin-bottom:7px;}
 .s-iban-n{font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(255,255,255,.8)!important;cursor:pointer;touch-action:manipulation;transition:color .2s;letter-spacing:1px;-webkit-text-decoration:none!important;text-decoration:none!important;}
 
 /* MAPA */
 .map-box{margin-top:26px;border:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.025);overflow:hidden;text-align:center;}
 .map-box iframe{display:block;width:100%;height:180px;border:none;filter:grayscale(40%) sepia(20%) brightness(.85);}
-.map-link{display:block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);padding:11px;opacity:.85;text-decoration:none;transition:opacity .2s;}
+.map-link{display:block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--gold);padding:11px;opacity:1;text-decoration:none;transition:opacity .2s;}
 .map-link:active{opacity:1;}
 /* PÉTALO */
 .petal-fall{position:fixed;top:-40px;pointer-events:none;z-index:9999;font-size:18px;animation:petalDrop linear forwards;}
@@ -277,7 +277,7 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
     <div class="venue">La Barraca del Palmar · Valencia</div>
     <p class="intro" id="hdr-intro">
       Nos alegra enormemente contar contigo en este día tan especial.<br>
-      Confírmanos tu asistencia antes del <strong style="color:rgba(255,255,255,.8)">30 de junio</strong>.
+      Confírmanos tu asistencia antes del <strong style="color:rgba(255,255,255,.98)">30 de junio</strong>.
     </p>
     </div>
   </div>
@@ -322,25 +322,25 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
           <button type="button" class="opt-btn sel-menu" id="m-adulto" onclick="selMenu('Menú Adulto')">
             <span class="opt-ico" style="font-size:18px">🍛</span>
             <span class="opt-lbl" style="font-size:8px">Menú Adulto</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.45);pointer-events:none">Clásico Valenciano</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Clásico Valenciano</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-veg" onclick="selMenu('Menú Adulto Vegetariano')">
             <span class="opt-ico" style="font-size:18px">🥗</span>
             <span class="opt-lbl" style="font-size:8px">Menú Vegetariano</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.45);pointer-events:none">Sin carne ni pescado</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Sin carne ni pescado</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-vegan" onclick="selMenu('Menú Adulto Vegano')">
             <span class="opt-ico" style="font-size:18px">🌿</span>
             <span class="opt-lbl" style="font-size:8px">Menú Vegano</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.45);pointer-events:none">100% vegetal</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">100% vegetal</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-inf" onclick="selMenu('Menú Infantil')">
             <span class="opt-ico" style="font-size:18px">🧒</span>
             <span class="opt-lbl" style="font-size:8px">Menú Infantil</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.45);pointer-events:none">Para los más pequeños</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Para los más pequeños</span>
             <div class="opt-check">✓</div>
           </button>
         </div>
@@ -412,7 +412,7 @@ input,textarea,select{font-size:16px!important;} /* prevent iOS zoom on focus */
     <div class="s-iban" id="s-iban" style="display:none">
       <div class="s-iban-t">✦ CUENTA PARA REGALO</div>
       <div class="s-iban-n" id="iban-s" onclick="copyIBAN('iban-s')">ES12 3456 7890 1234 5678 9012</div>
-      <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.35);margin-top:4px;">TOCA PARA COPIAR</div>
+      <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.7);margin-top:4px;">TOCA PARA COPIAR</div>
     </div>
     <button type="button" class="btn-pdf no-print" id="btn-pdf" onclick="descargarPDF()" style="display:none">
       📷 Guardar invitación de recuerdo
