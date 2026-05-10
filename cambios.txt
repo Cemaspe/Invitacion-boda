@@ -1,6 +1,6 @@
 Invitación:
 1 - Subir nombres, fecha y lugar hacia más arriba porque se tapan las fotos con ellos.
-2 - La parte del regalo de la boda, sustituir 'Regalo de la boda' por 2 anillos entrecruzados.Eliminar el mensaje inferior.
+2 - La parte del regalo de la boda, sustituir 'Regalo de la boda' por 2 anillos entrecruzados.Eliminar el mensaje inferior (Poner solo ¡Gracias!).
 3 - Arreglar el carrusel, hay 2 fotos y salen 4 puntos.
 
 Recordatorio:
