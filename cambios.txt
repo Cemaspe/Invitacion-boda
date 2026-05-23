@@ -2,6 +2,7 @@ Invitación:
 1 - Subir nombres, fecha y lugar hacia más arriba porque se tapan las fotos con ellos.
 2 - La parte del regalo de la boda, sustituir 'Regalo de la boda' por 2 anillos entrecruzados.Eliminar el mensaje inferior (Poner solo ¡Gracias!).
 3 - Arreglar el carrusel, hay 2 fotos y salen 4 puntos.
+4 - Añadir cuenta de la Revolut al IBAN
 
 Recordatorio:
 1 - Cambiar el 'os esperamos' por 'te esperamos'.
@@ -12,3 +13,4 @@ Recordatorio:
 6 - sustituir 'fin del evento' por despedida.
 7 - La cuenta bancara en iphone sigue saliendo azul. Dejarlo tal cuál la invitación.
 8 - Cambiar frase de 'nos morimos de ganas...'
+9 - Añadir cuenta de la Revolut al IBAN
