@@ -997,7 +997,7 @@ function descargarPDF(){
     // -- ORNAMENTO + NOMBRES + FECHA PILL SOBRE LA FOTO --
     ctx.textAlign = 'center';
     // Bloque (ornamento + nombres + pill + anillos) en la parte alta de la foto
-    let oy = 20;
+    let oy = 110;
 
     // Ornamento
     ctx.fillStyle = GOLD;
@@ -1026,13 +1026,6 @@ function descargarPDF(){
     ctx.letterSpacing = '3px';
     ctx.fillText('26 DE SEPTIEMBRE DE 2026', W/2, oy + 19);
     ctx.globalAlpha = 1;
-    oy += pillH + 155;
-
-    // -- ANILLOS SVG debajo de la fecha, sobre la foto --
-    if(ringsImg.complete && ringsImg.naturalWidth > 0){
-      const rw = 160, rh = 64;
-      ctx.drawImage(ringsImg, (W - rw)/2, oy, rw, rh);
-    }
 
     // Empieza el bloque de texto bajo la foto
     y = PHOTO_H + 14;
@@ -1064,7 +1057,14 @@ function descargarPDF(){
     ctx.globalAlpha = 1;
     y += 28;
 
-    // (los anillos ahora se dibujan sobre la foto, debajo de la fecha)
+    // -- ANILLOS SVG (entre divisor y título) --
+    if(ringsImg.complete && ringsImg.naturalWidth > 0){
+      const rw = 200, rh = 80;
+      ctx.drawImage(ringsImg, (W - rw)/2, y, rw, rh);
+      y += rh + 14;
+    } else {
+      y += 12;
+    }
 
     ctx.fillStyle = '#ffffff';
     // Forzar una sola línea: ajustar font-size si no cabe
