@@ -35,7 +35,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 -webkit-transform:translateZ(0);transform:translateZ(0);}
 .petal{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:fall linear infinite;}
 @keyframes fall{0%{transform:translateY(-1.25rem) rotate(0deg);opacity:0;}10%{opacity:.22;}90%{opacity:.08;}100%{transform:translateY(105vh) rotate(380deg);opacity:0;}}
-.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:calc(3rem + env(safe-area-inset-top,0px)) 0.5rem calc(6.25rem + env(safe-area-inset-bottom,0px));box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none;}
+.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:calc(3rem + env(safe-area-inset-top,0px)) 0.5rem calc(2rem + env(safe-area-inset-bottom,0px));box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none;}
 .outer::-webkit-scrollbar{display:none;width:0;height:0;}
 .outer .card{margin:0 auto;}
 .card{
@@ -161,7 +161,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 .date-pill{display:inline-block;margin-top:1.125rem;border:2px solid rgba(201,168,76,.70);padding:0.4375rem 1.5rem;font-family:'Cinzel',serif;font-size:0.625rem;letter-spacing:0.3125rem;color:var(--gold);font-weight:600;}
 .venue{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.8125rem;color:rgba(255,255,255,.92);margin-top:0.5rem;padding:0 clamp(1.125rem,5vw,2.75rem);}
 .intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.9375rem;color:rgba(255,255,255,.95);line-height:1.8;margin-top:1.125rem;padding:0 clamp(1.125rem,5vw,2.75rem);}
-.body{padding:2.25rem 2.75rem 2.75rem;}
+.body{padding:2.25rem 2.75rem 1.25rem;}
 @media(max-width:30rem){body{padding:0.5rem;}.card{border-radius:0;border-left:none;border-right:none;}}
 .slbl{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.1875rem;color:var(--gold);opacity:1;text-transform:uppercase;margin-bottom:0.5rem;display:block;}
 .div{display:flex;align-items:center;gap:0.875rem;margin:1.75rem 0 1.375rem;}
