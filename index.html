@@ -1026,16 +1026,16 @@ function descargarPDF(){
     ctx.fillStyle = '#ffffff';
     ctx.fillText(_nRight, _startX + _wL + _wM, oy);
     ctx.textAlign = 'center';
-    oy += 36;
+    oy += 16;
 
-    // Ornamento bajo los nombres
+    // Ornamento bajo los nombres (pegado)
     ctx.fillStyle = GOLD;
     ctx.globalAlpha = 0.9;
     ctx.font = '11px "Cormorant Garamond", serif';
     ctx.letterSpacing = '8px';
     ctx.fillText('✦ · · · · · ✦', W/2, oy);
     ctx.globalAlpha = 1;
-    oy += 70;
+    oy += 130;
 
     // Fecha pill
     const pillW = 300, pillH = 30, pillX = (W - pillW) / 2;
@@ -1048,7 +1048,7 @@ function descargarPDF(){
     ctx.letterSpacing = '3px';
     ctx.fillText('26 DE SEPTIEMBRE DE 2026', W/2, oy + 19);
     ctx.globalAlpha = 1;
-    oy += pillH + 38;
+    oy += pillH + 14;
 
     // -- VENUE + HORA sobre la foto, debajo de la fecha --
     ctx.fillStyle = 'rgba(255,255,255,0.92)';
