@@ -41,7 +41,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 -webkit-transform:translateZ(0);transform:translateZ(0);}
 .petal{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:fall linear infinite;}
 @keyframes fall{0%{transform:translateY(-1.25rem) rotate(0deg);opacity:0;}10%{opacity:.22;}90%{opacity:.08;}100%{transform:translateY(105vh) rotate(380deg);opacity:0;}}
-.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:3rem 0.5rem 6.25rem;box-sizing:border-box;}
+.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:3rem 0.5rem 6.25rem;box-sizing:border-box;}
 .outer .card{margin:0 auto;}
 .card{
   background:linear-gradient(160deg,rgba(12,22,16,0.90) 0%,rgba(8,18,12,0.93) 100%);
