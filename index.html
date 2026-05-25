@@ -2,15 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no, email=no, address=no">
 <title>✦ Cristina & Pau · Confirmación de Asistencia</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#D4A853;--green:#4E8A50;--red:#C0392B;--dark:#1E1410;--muted:#8A7060;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{height:100%;overscroll-behavior:none;}
-body{font-family:'Lato',sans-serif;background:#070d09;height:100vh;height:100lvh;overflow:hidden;overscroll-behavior:none;}
+html{height:100%;overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'Lato',sans-serif;background:#070d09;height:100vh;height:100dvh;height:100lvh;overflow:hidden;overscroll-behavior:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
 input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 
 .bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
@@ -23,6 +23,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
   left:0;
   width:100vw;
   height:100vh;
+  height:100dvh;
   height:100lvh; /* iOS: usa la altura "large" para que el show/hide de la barra no redimensione */
   z-index:0;
   pointer-events:none;
@@ -33,7 +34,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 }
 
 .bg-overlay{
-  position:fixed;top:0;left:0;width:100vw;height:100vh;height:100lvh;z-index:0;pointer-events:none;
+  position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;height:100lvh;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 40% at 20% 15%,rgba(201,168,76,.06),transparent),
     radial-gradient(ellipse 60% 40% at 80% 85%,rgba(193,123,140,.05),transparent),
@@ -41,7 +42,8 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 -webkit-transform:translateZ(0);transform:translateZ(0);}
 .petal{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:fall linear infinite;}
 @keyframes fall{0%{transform:translateY(-1.25rem) rotate(0deg);opacity:0;}10%{opacity:.22;}90%{opacity:.08;}100%{transform:translateY(105vh) rotate(380deg);opacity:0;}}
-.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:3rem 0.5rem 6.25rem;box-sizing:border-box;}
+.outer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:calc(3rem + env(safe-area-inset-top,0px)) 0.5rem calc(6.25rem + env(safe-area-inset-bottom,0px));box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none;}
+.outer::-webkit-scrollbar{display:none;width:0;height:0;}
 .outer .card{margin:0 auto;}
 .card{
   background:linear-gradient(160deg,rgba(12,22,16,0.90) 0%,rgba(8,18,12,0.93) 100%);
