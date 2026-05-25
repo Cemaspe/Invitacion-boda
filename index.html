@@ -1049,15 +1049,7 @@ function descargarPDF(){
     });
     y += 16;
 
-    // -- DIVISOR --
-    ctx.fillStyle = GOLD;
-    ctx.globalAlpha = 0.55;
-    ctx.font = '13px serif';
-    ctx.fillText('✦', W/2, y + 14);
-    ctx.globalAlpha = 1;
-    y += 28;
-
-    // -- ANILLOS SVG (entre divisor y título) --
+    // -- ANILLOS SVG (entre intro y título) --
     if(ringsImg.complete && ringsImg.naturalWidth > 0){
       const rw = 200, rh = 80;
       ctx.drawImage(ringsImg, (W - rw)/2, y, rw, rh);
