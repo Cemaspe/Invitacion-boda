@@ -1,8 +1,17 @@
 Invitación:
 1 - Subir nombres, fecha y lugar hacia más arriba porque se tapan las fotos con ellos.
-2 - La parte del regalo de la boda, sustituir 'Regalo de la boda' por 2 anillos entrecruzados.Eliminar el mensaje inferior (Poner solo ¡Gracias!).
-3 - Arreglar el carrusel, hay 2 fotos y salen 4 puntos.
-4 - Añadir cuenta de la Revolut al IBAN
+2 - Quitar lo de confirmar asistencia (lo pondremos en el mensaje) y bajar “nuestra” para que quede junto “nuestra historia”.
+3 - No poner aclaraciones en los MENÚS (que solo aparezca adulto, vegetariano, vegano o infantil)
+4 - La parte del regalo de la boda, sustituir 'Regalo de la boda' por 2 anillos entrecruzados.Eliminar el mensaje inferior (Poner solo ¡Gracias!).
+5 - Arreglar el carrusel, hay 2 fotos y salen 4 puntos.
+6 - Añadir cuenta de la Revolut al IBAN.
+7 - Cambiar el color marrón de la invitación a verde oscuro
+
+INVITACIÓN DESCARGADA:
+- Poner: ¡NOS VEMOS EL 26 DE SEPTIEMBRE A LAS 12H!
+- ⁠Cambiar “Estamos deseando celebrarlo con vosotros” por “Estamos deseando celebrarlo contigo”
+- ⁠Cambiar lo de “Cuenta para regalo” por el símbolo de los dos anillos entrelazándose
+- ⁠EN IPHONE NO SE DESCARGA!!!
 
 Recordatorio:
 1 - Cambiar el 'os esperamos' por 'te esperamos'.
@@ -12,5 +21,15 @@ Recordatorio:
 5 - Quitar del programa del día todas las descripciones.
 6 - sustituir 'fin del evento' por despedida.
 7 - La cuenta bancara en iphone sigue saliendo azul. Dejarlo tal cuál la invitación.
-8 - Cambiar frase de 'nos morimos de ganas...'
-9 - Añadir cuenta de la Revolut al IBAN
+8 - Cambiar frase de 'nos morimos de ganas...' por “¡Estamos deseando celebrarlo contigo!”
+9 - Añadir cuenta de la Revolut al IBAN.
+10 - Quitar asterisco a NOMBRE.
+11 - Quitar lo de “deja en blanco…” en TUS ALERGIAS O INTOLERANCIAS
+
+12:00 BIENVENIDA
+12:15 CEREMONIA
+13:30 CÓCTEL
+15:00 BANQUETE
+17:00 FIESTA
+21:00 RESOPÓN
+22:00 DESPEDIDA
