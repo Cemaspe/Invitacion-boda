@@ -1008,11 +1008,24 @@ function descargarPDF(){
     ctx.globalAlpha = 1;
     oy += 36;
 
-    // Nombres
-    ctx.fillStyle = '#ffffff';
+    // Nombres (con & en dorado, como en la web)
     ctx.font = 'normal 400 34px "Cinzel", serif';
     ctx.letterSpacing = '4px';
-    ctx.fillText('CRISTINA & PAU', W/2, oy);
+    const _nLeft  = 'CRISTINA ';
+    const _nMid   = '&';
+    const _nRight = ' PAU';
+    const _wL = ctx.measureText(_nLeft).width;
+    const _wM = ctx.measureText(_nMid).width;
+    const _wR = ctx.measureText(_nRight).width;
+    const _startX = (W - (_wL + _wM + _wR)) / 2;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(_nLeft, _startX, oy);
+    ctx.fillStyle = GOLD;
+    ctx.fillText(_nMid, _startX + _wL, oy);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(_nRight, _startX + _wL + _wM, oy);
+    ctx.textAlign = 'center';
     oy += 70;
 
     // Fecha pill
