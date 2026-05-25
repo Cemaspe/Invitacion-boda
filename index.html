@@ -10,7 +10,7 @@
 :root{--gold:#D4A853;--green:#4E8A50;--red:#C0392B;--dark:#1E1410;--muted:#8A7060;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{height:100%;overscroll-behavior:none;}
-body{font-family:'Lato',sans-serif;background:#0d0b08;min-height:100%;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:auto;}
+body{font-family:'Lato',sans-serif;background:#08110a;min-height:100%;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:auto;}
 input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 
 .bg{position:fixed;inset:0;pointer-events:none;z-index:0;}
@@ -33,13 +33,13 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
   background:
     radial-gradient(ellipse 60% 40% at 20% 15%,rgba(201,168,76,.06),transparent),
     radial-gradient(ellipse 60% 40% at 80% 85%,rgba(193,123,140,.05),transparent),
-    rgba(13,11,8,.62);-webkit-backface-visibility:hidden;backface-visibility:hidden;
+    rgba(8,17,10,.62);-webkit-backface-visibility:hidden;backface-visibility:hidden;
 -webkit-transform:translateZ(0);transform:translateZ(0);}
 .petal{position:fixed;pointer-events:none;z-index:0;opacity:0;animation:fall linear infinite;}
 @keyframes fall{0%{transform:translateY(-1.25rem) rotate(0deg);opacity:0;}10%{opacity:.22;}90%{opacity:.08;}100%{transform:translateY(105vh) rotate(380deg);opacity:0;}}
 .outer{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:3rem 1rem 6.25rem;}
 .card{
-  background:linear-gradient(160deg,#1c1309 0%,#150f07 100%);
+  background:linear-gradient(160deg,#0e1f14 0%,#0a170e 100%);
   border:1px solid rgba(220,190,100,.3);
   max-width:35rem;
   width:100%;
@@ -118,12 +118,12 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
   inset:0;
   background:
     linear-gradient(to bottom,
-      rgba(13,11,8,0.82) 0%,
-      rgba(13,11,8,0.45) 12%,
-      rgba(13,11,8,0.45) 60%,
-      rgba(21,15,7,0.75) 80%,
-      #150f07 92%,
-      #150f07 100%
+      rgba(8,17,10,0.82) 0%,
+      rgba(8,17,10,0.45) 12%,
+      rgba(8,17,10,0.45) 60%,
+      rgba(10,23,14,0.75) 80%,
+      #0a170e 92%,
+      #0a170e 100%
     );
 }
 .hdr-hero .orn{
@@ -173,7 +173,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 .f input::placeholder,.f textarea::placeholder{color:rgba(255,255,255,.55);font-style:italic;}
 .f input:focus,.f select:focus,.f textarea:focus{border-bottom-color:var(--gold);background:rgba(201,168,76,.04);}
 .f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6L10 0z' fill='%23C9A84C'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.75rem center;padding-right:2rem;}
-.f select option{background:#1c1309;color:#fff;}
+.f select option{background:#0e1f14;color:#fff;}
 .f textarea{resize:vertical;min-height:4.5rem;line-height:1.6;}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem;}
 @media(max-width:28.75rem){.frow{grid-template-columns:1fr;}}
@@ -850,7 +850,7 @@ function descargarPDF(){
     const GOLD = '#D4A853';
     const WHITE = 'rgba(255,255,255,0.88)';
     const DIM = 'rgba(255,255,255,0.55)';
-    const BG = '#150f07';
+    const BG = '#0a170e';
 
     // Calcular altura total
     const lineH = 28;
@@ -887,8 +887,8 @@ function descargarPDF(){
       ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, PHOTO_H);
       // Overlay degradado
       const grad = ctx.createLinearGradient(0, 0, 0, PHOTO_H);
-      grad.addColorStop(0, 'rgba(21,15,7,0.15)');
-      grad.addColorStop(1, 'rgba(21,15,7,0.88)');
+      grad.addColorStop(0, 'rgba(10,23,14,0.15)');
+      grad.addColorStop(1, 'rgba(10,23,14,0.88)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, PHOTO_H);
     }
