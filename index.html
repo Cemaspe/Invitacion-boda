@@ -480,7 +480,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 
   <div id="success">
     <span class="s-ico" id="s-ico">🥂</span>
-    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre a las 12h!</div>
+    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre a las 12:00h!</div>
     <p class="s-body" id="s-body"></p>
     <div class="saved-pill">✓ Confirmación registrada</div>
     <div class="s-summary" id="s-summary" style="display:none">
@@ -995,7 +995,8 @@ function descargarPDF(){
 
     // -- ORNAMENTO + NOMBRES + FECHA PILL SOBRE LA FOTO --
     ctx.textAlign = 'center';
-    let oy = PHOTO_H - 150; // posición vertical de inicio del bloque encima de la foto
+    // Centrar verticalmente el bloque (ornamento + nombres + pill) en la foto
+    let oy = PHOTO_H/2 - 40;
 
     // Ornamento
     ctx.fillStyle = GOLD;
@@ -1028,24 +1029,24 @@ function descargarPDF(){
     // Empieza el bloque de texto bajo la foto
     y = PHOTO_H + 14;
 
-    // -- VENUE --
+    // -- VENUE -- (30% más grande: 13px -> 17px)
     ctx.fillStyle = DIM;
-    ctx.font = 'italic 13px "Cormorant Garamond", serif';
+    ctx.font = 'italic 17px "Cormorant Garamond", serif';
     ctx.letterSpacing = '0px';
-    ctx.fillText('La Barraca del Palmar (Valencia)', W/2, y + 16);
-    y += 32;
+    ctx.fillText('La Barraca del Palmar (Valencia)', W/2, y + 20);
+    y += 38;
 
-    // -- INTRO --
+    // -- INTRO -- (30% más grande: 14px -> 18px, line-height 22 -> 28)
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
-    ctx.font = 'italic 14px "Cormorant Garamond", serif';
+    ctx.font = 'italic 18px "Cormorant Garamond", serif';
     const introBase = 'nos alegra enormemente contar contigo en este día tan especial.';
     const introTxt = invitadoNom ? (invitadoNom + ', ' + introBase) : ('N' + introBase.slice(1));
     const introLines = wrapText(ctx, introTxt, W - PAD*2);
     introLines.forEach(line => {
-      ctx.fillText(line, W/2, y + 16);
-      y += 22;
+      ctx.fillText(line, W/2, y + 20);
+      y += 28;
     });
-    y += 14;
+    y += 16;
 
     // -- DIVISOR --
     ctx.fillStyle = GOLD;
@@ -1264,7 +1265,7 @@ function mostrarExito(asist, nom, personas){
   if(asist==='Sí'){
     document.getElementById('s-ico').textContent='🥂';
     const total = personas.length;
-    document.getElementById('s-title').textContent='¡Nos vemos el 26 de septiembre a las 12h!';
+    document.getElementById('s-title').textContent='¡Nos vemos el 26 de septiembre a las 12:00h!';
     document.getElementById('s-body').innerHTML=
       `¡Qué alegría, <em>${esc(nom)}</em>! Nos hace muy felices que puedas acompañarnos,`+
       (total>1?` y hemos registrado a <span class="s-gold">${total} personas</span>.`:'')+
