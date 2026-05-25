@@ -417,7 +417,17 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
       </div>
 
       <div class="iban-box">
-        <div class="iban-title" style="font-size:1.5rem;letter-spacing:0.25rem;">💍💍</div>
+        <div class="iban-title" style="font-size:0;line-height:0;margin-bottom:1rem;">
+          <svg width="140" height="56" viewBox="0 0 140 56" fill="none" aria-hidden="true">
+            <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+            <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
+            <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
+            <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+            <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+            <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+            <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
+          </svg>
+        </div>
         <div class="iban-num" id="iban-main" onclick="copyIBAN('iban-main')">ES11 1583 0001 1191 1447 7085</div>
         <div class="iban-hint">TOCA PARA COPIAR</div>
         <p class="iban-note">¡Gracias!</p>
