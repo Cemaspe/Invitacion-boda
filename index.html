@@ -997,7 +997,7 @@ function descargarPDF(){
     // -- ORNAMENTO + NOMBRES + FECHA PILL SOBRE LA FOTO --
     ctx.textAlign = 'center';
     // Bloque (ornamento + nombres + pill + anillos) en la parte alta de la foto
-    let oy = 110;
+    let oy = 85;
 
     // Ornamento
     ctx.fillStyle = GOLD;
@@ -1026,7 +1026,7 @@ function descargarPDF(){
     ctx.fillStyle = '#ffffff';
     ctx.fillText(_nRight, _startX + _wL + _wM, oy);
     ctx.textAlign = 'center';
-    oy += 70;
+    oy += 95;
 
     // Fecha pill
     const pillW = 300, pillH = 30, pillX = (W - pillW) / 2;
@@ -1039,16 +1039,16 @@ function descargarPDF(){
     ctx.letterSpacing = '3px';
     ctx.fillText('26 DE SEPTIEMBRE DE 2026', W/2, oy + 19);
     ctx.globalAlpha = 1;
+    oy += pillH + 22;
+
+    // -- VENUE + HORA sobre la foto, debajo de la fecha --
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    ctx.font = 'italic 15px "Cormorant Garamond", serif';
+    ctx.letterSpacing = '0px';
+    ctx.fillText('La Barraca del Palmar (Valencia) · 12:00h', W/2, oy);
 
     // Empieza el bloque de texto bajo la foto
-    y = PHOTO_H + 14;
-
-    // -- VENUE -- (30% más grande: 13px -> 17px)
-    ctx.fillStyle = DIM;
-    ctx.font = 'italic 17px "Cormorant Garamond", serif';
-    ctx.letterSpacing = '0px';
-    ctx.fillText('La Barraca del Palmar (Valencia)', W/2, y + 20);
-    y += 38;
+    y = PHOTO_H + 18;
 
     // -- INTRO -- (30% más grande: 14px -> 18px, line-height 22 -> 28)
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
