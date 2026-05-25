@@ -1102,17 +1102,53 @@ function descargarPDF(){
 
 
 
-    // Borde inferior dorado
-    ctx.strokeStyle = 'rgba(212,168,83,0.2)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(1, 1, W-2, totalH-2);
-
     // Ajustar canvas a altura real
+    const finalH = y + 40;
     const finalCanvas = document.createElement('canvas');
     finalCanvas.width = W * SCALE;
-    finalCanvas.height = (y + 40) * SCALE;
+    finalCanvas.height = finalH * SCALE;
     const fctx = finalCanvas.getContext('2d');
     fctx.drawImage(canvas, 0, 0);
+
+    // -- MARCO DORADO sobre todo el PNG --
+    fctx.scale(SCALE, SCALE);
+    // Marco exterior
+    fctx.strokeStyle = 'rgba(212,168,83,0.7)';
+    fctx.lineWidth = 1.5;
+    fctx.strokeRect(6, 6, W - 12, finalH - 12);
+    // Marco interior fino
+    fctx.strokeStyle = 'rgba(212,168,83,0.35)';
+    fctx.lineWidth = 0.8;
+    fctx.strokeRect(11, 11, W - 22, finalH - 22);
+    // Adornos en las 4 esquinas (como en el card del HTML)
+    const cs = 16;                            // largo de la L
+    const cInset = 14;                         // distancia desde el borde
+    fctx.strokeStyle = 'rgba(212,168,83,0.85)';
+    fctx.lineWidth = 1.2;
+    // Top-left
+    fctx.beginPath();
+    fctx.moveTo(cInset, cInset + cs);
+    fctx.lineTo(cInset, cInset);
+    fctx.lineTo(cInset + cs, cInset);
+    fctx.stroke();
+    // Top-right
+    fctx.beginPath();
+    fctx.moveTo(W - cInset - cs, cInset);
+    fctx.lineTo(W - cInset, cInset);
+    fctx.lineTo(W - cInset, cInset + cs);
+    fctx.stroke();
+    // Bottom-left
+    fctx.beginPath();
+    fctx.moveTo(cInset, finalH - cInset - cs);
+    fctx.lineTo(cInset, finalH - cInset);
+    fctx.lineTo(cInset + cs, finalH - cInset);
+    fctx.stroke();
+    // Bottom-right
+    fctx.beginPath();
+    fctx.moveTo(W - cInset - cs, finalH - cInset);
+    fctx.lineTo(W - cInset, finalH - cInset);
+    fctx.lineTo(W - cInset, finalH - cInset - cs);
+    fctx.stroke();
 
     btn.innerHTML = orig;
     btn.disabled = false;
