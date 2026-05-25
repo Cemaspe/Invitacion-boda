@@ -957,7 +957,7 @@ function descargarPDF(){
 
     let y = 0;
 
-    // -- FOTO ANILLO con object-fit:cover centrado al 40% --
+    // -- FOTO con object-fit:cover centrado al 40% --
     let photoOK = false;
     if(img.complete && img.naturalWidth > 0) {
       try {
@@ -975,60 +975,64 @@ function descargarPDF(){
           sy = (ih - sh) * 0.4;
         }
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, PHOTO_H);
-        // Overlay degradado
+        // Overlay degradado oscuro hacia abajo para legibilidad de texto sobre la foto
         const grad = ctx.createLinearGradient(0, 0, 0, PHOTO_H);
-        grad.addColorStop(0, 'rgba(8,18,12,0.15)');
-        grad.addColorStop(1, 'rgba(8,18,12,0.88)');
+        grad.addColorStop(0, 'rgba(8,18,12,0.18)');
+        grad.addColorStop(0.45, 'rgba(8,18,12,0.30)');
+        grad.addColorStop(1, 'rgba(8,18,12,0.92)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, W, PHOTO_H);
         photoOK = true;
       } catch(e){ photoOK = false; }
     }
     if(!photoOK){
-      // Fondo dorado tenue si no se pudo cargar la foto (evita canvas vacío)
       const grad2 = ctx.createLinearGradient(0,0,0,PHOTO_H);
       grad2.addColorStop(0,'rgba(212,168,83,0.10)');
       grad2.addColorStop(1,'rgba(8,18,12,0.85)');
       ctx.fillStyle = grad2;
       ctx.fillRect(0,0,W,PHOTO_H);
     }
-    y = PHOTO_H;
 
-    // -- ORNAMENTO --
+    // -- ORNAMENTO + NOMBRES + FECHA PILL SOBRE LA FOTO --
     ctx.textAlign = 'center';
+    let oy = PHOTO_H - 150; // posición vertical de inicio del bloque encima de la foto
+
+    // Ornamento
     ctx.fillStyle = GOLD;
-    ctx.globalAlpha = 0.85;
+    ctx.globalAlpha = 0.9;
     ctx.font = '11px "Cormorant Garamond", serif';
     ctx.letterSpacing = '8px';
-    ctx.fillText('✦ · · · · · ✦', W/2, y + 28);
+    ctx.fillText('✦ · · · · · ✦', W/2, oy);
     ctx.globalAlpha = 1;
-    y += 44;
+    oy += 36;
 
-    // -- NOMBRES --
+    // Nombres
     ctx.fillStyle = '#ffffff';
     ctx.font = 'normal 400 34px "Cinzel", serif';
     ctx.letterSpacing = '4px';
-    ctx.fillText('CRISTINA & PAU', W/2, y + 34);
-    y += 52;
+    ctx.fillText('CRISTINA & PAU', W/2, oy);
+    oy += 26;
 
-    // -- FECHA PILL --
+    // Fecha pill
     const pillW = 300, pillH = 30, pillX = (W - pillW) / 2;
-    ctx.strokeStyle = 'rgba(212,168,83,0.4)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(pillX, y, pillW, pillH);
+    ctx.strokeStyle = 'rgba(212,168,83,0.55)';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(pillX, oy, pillW, pillH);
     ctx.fillStyle = GOLD;
-    ctx.globalAlpha = 0.9;
+    ctx.globalAlpha = 0.95;
     ctx.font = '10px "Cinzel", serif';
     ctx.letterSpacing = '3px';
-    ctx.fillText('26 DE SEPTIEMBRE DE 2026', W/2, y + 19);
+    ctx.fillText('26 DE SEPTIEMBRE DE 2026', W/2, oy + 19);
     ctx.globalAlpha = 1;
-    y += 44;
+
+    // Empieza el bloque de texto bajo la foto
+    y = PHOTO_H + 14;
 
     // -- VENUE --
     ctx.fillStyle = DIM;
     ctx.font = 'italic 13px "Cormorant Garamond", serif';
     ctx.letterSpacing = '0px';
-    ctx.fillText('La Barraca del Palmar (Valencia) • 12:00h', W/2, y + 16);
+    ctx.fillText('La Barraca del Palmar (Valencia)', W/2, y + 16);
     y += 32;
 
     // -- INTRO --
@@ -1063,14 +1067,17 @@ function descargarPDF(){
     }
 
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'normal 400 20px "Cinzel", serif';
-    ctx.letterSpacing = '2px';
-    const titleLines = wrapText(ctx, nom, W - PAD*2);
-    titleLines.forEach(line => {
-      ctx.fillText(line, W/2, y + 22);
-      y += 28;
-    });
-    y += 12;
+    // Forzar una sola línea: ajustar font-size si no cabe
+    const maxTitleW = W - PAD*2;
+    let titleFs = 17;
+    ctx.letterSpacing = '1px';
+    ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
+    while(ctx.measureText(nom).width > maxTitleW && titleFs > 10){
+      titleFs -= 1;
+      ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
+    }
+    ctx.fillText(nom, W/2, y + titleFs + 4);
+    y += titleFs + 16;
 
 
 
