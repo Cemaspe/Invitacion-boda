@@ -1053,7 +1053,7 @@ function descargarPDF(){
     // -- INTRO -- (30% más grande: 14px -> 18px, line-height 22 -> 28)
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
     ctx.font = 'italic 18px "Cormorant Garamond", serif';
-    const introBase = 'nos alegra enormemente contar contigo en este día tan especial.';
+    const introBase = 'nos alegra enormemente contar contigo en este día tan importante para nosotros.';
     const introTxt = invitadoNom ? (invitadoNom + ', ' + introBase) : ('N' + introBase.slice(1));
     const introLines = wrapText(ctx, introTxt, W - PAD*2);
     introLines.forEach(line => {
