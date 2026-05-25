@@ -1059,15 +1059,18 @@ function descargarPDF(){
     // Empieza el bloque de texto bajo la foto
     y = PHOTO_H + 18;
 
-    // -- INTRO -- (30% más grande: 14px -> 18px, line-height 22 -> 28)
+    // -- INTRO -- en dos frases separadas
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
     ctx.font = 'italic 18px "Cormorant Garamond", serif';
-    const introBase = 'nos alegra enormemente contar contigo en este día tan importante para nosotros.';
-    const introTxt = invitadoNom ? (invitadoNom + ', ' + introBase) : ('N' + introBase.slice(1));
-    const introLines = wrapText(ctx, introTxt, W - PAD*2);
-    introLines.forEach(line => {
-      ctx.fillText(line, W/2, y + 20);
-      y += 28;
+    const intro1 = invitadoNom
+      ? invitadoNom + ', nos alegra enormemente contar contigo'
+      : 'Nos alegra enormemente contar contigo';
+    const intro2 = 'en este día tan importante para nosotros.';
+    [intro1, intro2].forEach(frase => {
+      wrapText(ctx, frase, W - PAD*2).forEach(line => {
+        ctx.fillText(line, W/2, y + 20);
+        y += 28;
+      });
     });
     y += 16;
 
