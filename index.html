@@ -997,16 +997,16 @@ function descargarPDF(){
     // -- ORNAMENTO + NOMBRES + FECHA PILL SOBRE LA FOTO --
     ctx.textAlign = 'center';
     // Bloque (ornamento + nombres + pill + anillos) en la parte alta de la foto
-    let oy = 60;
+    let oy = 46;
 
-    // Ornamento
+    // Ornamento (equidistante con el de debajo de los nombres)
     ctx.fillStyle = GOLD;
     ctx.globalAlpha = 0.9;
     ctx.font = '11px "Cormorant Garamond", serif';
     ctx.letterSpacing = '8px';
     ctx.fillText('✦ · · · · · ✦', W/2, oy);
     ctx.globalAlpha = 1;
-    oy += 36;
+    oy = 96;
 
     // Nombres (con & en dorado, como en la web)
     ctx.font = 'normal 400 34px "Cinzel", serif';
@@ -1026,7 +1026,7 @@ function descargarPDF(){
     ctx.fillStyle = '#ffffff';
     ctx.fillText(_nRight, _startX + _wL + _wM, oy);
     ctx.textAlign = 'center';
-    oy = 120;
+    oy = 128;
 
     // Ornamento bajo los nombres
     ctx.fillStyle = GOLD;
