@@ -890,27 +890,39 @@ function descargarPDF(){
     let y = 0;
 
     // -- FOTO ANILLO con object-fit:cover centrado al 40% --
+    let photoOK = false;
     if(img.complete && img.naturalWidth > 0) {
-      const iw = img.naturalWidth, ih = img.naturalHeight;
-      const dr = W / PHOTO_H;
-      const ir = iw / ih;
-      let sx, sy, sw, sh;
-      if(ir > dr) {
-        sh = ih; sw = sh * dr;
-        sx = (iw - sw) / 2;
-        sy = (ih - sh) * 0.4;
-      } else {
-        sw = iw; sh = sw / dr;
-        sx = 0;
-        sy = (ih - sh) * 0.4;
-      }
-      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, PHOTO_H);
-      // Overlay degradado
-      const grad = ctx.createLinearGradient(0, 0, 0, PHOTO_H);
-      grad.addColorStop(0, 'rgba(10,23,14,0.15)');
-      grad.addColorStop(1, 'rgba(10,23,14,0.88)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, PHOTO_H);
+      try {
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const dr = W / PHOTO_H;
+        const ir = iw / ih;
+        let sx, sy, sw, sh;
+        if(ir > dr) {
+          sh = ih; sw = sh * dr;
+          sx = (iw - sw) / 2;
+          sy = (ih - sh) * 0.4;
+        } else {
+          sw = iw; sh = sw / dr;
+          sx = 0;
+          sy = (ih - sh) * 0.4;
+        }
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, PHOTO_H);
+        // Overlay degradado
+        const grad = ctx.createLinearGradient(0, 0, 0, PHOTO_H);
+        grad.addColorStop(0, 'rgba(10,23,14,0.15)');
+        grad.addColorStop(1, 'rgba(10,23,14,0.88)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, PHOTO_H);
+        photoOK = true;
+      } catch(e){ photoOK = false; }
+    }
+    if(!photoOK){
+      // Fondo dorado tenue si no se pudo cargar la foto (evita canvas vacío)
+      const grad2 = ctx.createLinearGradient(0,0,0,PHOTO_H);
+      grad2.addColorStop(0,'rgba(212,168,83,0.10)');
+      grad2.addColorStop(1,'rgba(10,23,14,0.85)');
+      ctx.fillStyle = grad2;
+      ctx.fillRect(0,0,W,PHOTO_H);
     }
     y = PHOTO_H;
 
@@ -1012,38 +1024,47 @@ function descargarPDF(){
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-    if(isIOS){
-      // iOS Safari ignora download="...": abrimos la imagen en una pestaña
-      // para que el usuario la guarde manteniendo pulsado.
-      finalCanvas.toBlob(function(blob){
-        const url = URL.createObjectURL(blob);
-        const win = window.open();
-        if(win){
-          win.document.write(
-            '<!doctype html><html><head><meta charset="utf-8">'+
-            '<meta name="viewport" content="width=device-width,initial-scale=1">'+
-            '<title>Tu invitación</title>'+
-            '<style>body{margin:0;background:#0a170e;display:flex;flex-direction:column;'+
-            'align-items:center;justify-content:center;min-height:100vh;padding:16px;'+
-            'font-family:-apple-system,sans-serif;color:#D4A853;}'+
-            'img{max-width:100%;height:auto;display:block;border:1px solid rgba(212,168,83,.2);}'+
-            'p{margin:14px 16px;font-size:14px;text-align:center;line-height:1.5;}</style>'+
-            '</head><body>'+
-            '<p>📷 Mantén pulsada la imagen y elige <b>“Guardar en Fotos”</b></p>'+
-            '<img src="'+url+'" alt="Invitación">'+
-            '</body></html>'
-          );
-          win.document.close();
-        } else {
-          window.location.href = url;
-        }
-        setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
-      }, 'image/png');
-    } else {
-      const link = document.createElement('a');
-      link.download = filename;
-      link.href = finalCanvas.toDataURL('image/png');
-      link.click();
+    try {
+      if(isIOS){
+        // iOS Safari ignora download="...": abrimos la imagen en una pestaña
+        // para que el usuario la guarde manteniendo pulsado.
+        finalCanvas.toBlob(function(blob){
+          if(!blob){ alert('No se pudo generar la imagen. Inténtalo de nuevo.'); return; }
+          const url = URL.createObjectURL(blob);
+          const win = window.open();
+          if(win){
+            win.document.write(
+              '<!doctype html><html><head><meta charset="utf-8">'+
+              '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+              '<title>Tu invitación</title>'+
+              '<style>body{margin:0;background:#0a170e;display:flex;flex-direction:column;'+
+              'align-items:center;justify-content:center;min-height:100vh;padding:16px;'+
+              'font-family:-apple-system,sans-serif;color:#D4A853;}'+
+              'img{max-width:100%;height:auto;display:block;border:1px solid rgba(212,168,83,.2);}'+
+              'p{margin:14px 16px;font-size:14px;text-align:center;line-height:1.5;}</style>'+
+              '</head><body>'+
+              '<p>📷 Mantén pulsada la imagen y elige <b>“Guardar en Fotos”</b></p>'+
+              '<img src="'+url+'" alt="Invitación">'+
+              '</body></html>'
+            );
+            win.document.close();
+          } else {
+            window.location.href = url;
+          }
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+        }, 'image/png');
+      } else {
+        const dataURL = finalCanvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = dataURL;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+    } catch(err){
+      console.error('Error generando imagen:', err);
+      alert('No se pudo generar la imagen. Si estás en iPhone, prueba actualizar Safari.');
     }
   }
 
@@ -1064,8 +1085,13 @@ function descargarPDF(){
     return lines;
   }
 
+  img.crossOrigin = 'anonymous';
   img.onload = drawCanvas;
-  img.onerror = drawCanvas;
+  img.onerror = function(){
+    // Si la imagen falla (CORS/red), seguimos dibujando sin ella
+    img.naturalWidth = 0;
+    drawCanvas();
+  };
   img.src = srcImg ? srcImg.src : '';
   if(!srcImg || !srcImg.src) drawCanvas();
 }
@@ -1144,6 +1170,8 @@ function añadirCalendario() {
 function mostrarExito(asist, nom, personas){
   document.getElementById('form-view').style.display='none';
   document.getElementById('success').classList.add('on');
+  // Scroll arriba para ver la foto + título de éxito
+  try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(_){ window.scrollTo(0,0); }
   if(asist==='Sí') lanzarPetalos();
   document.getElementById('btn-pdf').style.display='block';
   document.getElementById('btn-cal').style.display='block';
