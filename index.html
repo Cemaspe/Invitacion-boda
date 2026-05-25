@@ -1271,17 +1271,18 @@ function mostrarExito(asist, nom, personas){
       `<br><span class="s-gold">¡Estamos deseando celebrarlo contigo!</span>`;
     const rows = document.getElementById('s-summary-rows');
     rows.innerHTML = personas.map(p=>{
+      const menuV = esc((p.menu||'').replace('Menú ',''));
       const al  = p.al ? `<div class="s-summary-extra"><span class="s-summary-k">Alergias</span> · ${esc(p.al)}</div>` : '';
       const bus = p.bus==='Sí'
         ? `<div class="s-summary-extra"><span class="s-summary-k">Autobús</span> · ${esc(p.parada||'sin parada')}</div>`
         : '';
       return `
-      <div class="s-summary-row" style="flex-direction:column;align-items:stretch;gap:.25rem;">
-        <div style="display:flex;justify-content:space-between;gap:.75rem;width:100%;">
-          <span class="s-summary-name">${esc(p.nom)} ${esc(p.ap||'')}</span>
-          <span class="s-summary-menu">${esc((p.menu||'').replace('Menú ',''))}</span>
+      <div class="s-summary-row" style="display:grid;grid-template-columns:1fr 1.2fr;gap:1rem;align-items:center;">
+        <span class="s-summary-name">${esc(p.nom)} ${esc(p.ap||'')}</span>
+        <div style="display:flex;flex-direction:column;gap:.35rem;">
+          <div class="s-summary-extra"><span class="s-summary-k">Menú</span> · ${menuV}</div>
+          ${al}${bus}
         </div>
-        ${al}${bus}
       </div>`;
     }).join('');
     document.getElementById('s-summary').style.display='block';
