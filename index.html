@@ -127,7 +127,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
   position:relative;
   z-index:2;
   display:block;
-  padding-top:clamp(7.5rem, 24vw, 12.5rem);
+  padding-top:clamp(3.5rem, 12vw, 6.5rem);
   margin-bottom:0.625rem;
   margin-top:0;
 }
@@ -310,8 +310,6 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
       <div class="carousel-dots">
         <span class="carousel-dot active" onclick="goToSlide(0)"></span>
         <span class="carousel-dot" onclick="goToSlide(1)"></span>
-        <span class="carousel-dot" onclick="goToSlide(2)"></span>
-        <span class="carousel-dot" onclick="goToSlide(3)"></span>
       </div>
       <div class="hdr-photo-overlay"></div>
     </div>
@@ -320,8 +318,8 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
     <div class="date-pill">26 de septiembre de 2026</div>
     <div class="venue">La Barraca del Palmar · Valencia</div>
     <p class="intro" id="hdr-intro">
-      Nos encantaría que siguieras formando parte de nuestra historia.<br>
-      Confírmanos tu asistencia lo antes posible.
+      Nos encantaría que siguieras formando parte de<br>
+      nuestra historia.
     </p>
     </div>
   </div>
@@ -365,26 +363,22 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
         <div class="opt-grid" style="grid-template-columns:1fr 1fr;">
           <button type="button" class="opt-btn sel-menu" id="m-adulto" onclick="selMenu('Menú Adulto')">
             <span class="opt-ico" style="font-size:18px">🍛</span>
-            <span class="opt-lbl" style="font-size:8px">Menú Adulto</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Clásico Valenciano</span>
+            <span class="opt-lbl" style="font-size:8px">Adulto</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-veg" onclick="selMenu('Menú Adulto Vegetariano')">
             <span class="opt-ico" style="font-size:18px">🥗</span>
-            <span class="opt-lbl" style="font-size:8px">Menú Vegetariano</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Sin carne ni pescado</span>
+            <span class="opt-lbl" style="font-size:8px">Vegetariano</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-vegan" onclick="selMenu('Menú Adulto Vegano')">
             <span class="opt-ico" style="font-size:18px">🌿</span>
-            <span class="opt-lbl" style="font-size:8px">Menú Vegano</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">100% vegetal</span>
+            <span class="opt-lbl" style="font-size:8px">Vegano</span>
             <div class="opt-check">✓</div>
           </button>
           <button type="button" class="opt-btn" id="m-inf" onclick="selMenu('Menú Infantil')">
             <span class="opt-ico" style="font-size:18px">🧒</span>
-            <span class="opt-lbl" style="font-size:8px">Menú Infantil</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.8);pointer-events:none">Para los más pequeños</span>
+            <span class="opt-lbl" style="font-size:8px">Infantil</span>
             <div class="opt-check">✓</div>
           </button>
         </div>
@@ -419,10 +413,10 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
       </div>
 
       <div class="iban-box">
-        <div class="iban-title">✦ REGALO DE BODA ✦</div>
+        <div class="iban-title" style="font-size:1.5rem;letter-spacing:0.25rem;">💍💍</div>
         <div class="iban-num" id="iban-main" onclick="copyIBAN('iban-main')">ES12 3456 7890 1234 5678 9012</div>
         <div class="iban-hint">TOCA PARA COPIAR</div>
-        <p class="iban-note">Si deseas hacernos un regalo, puedes transferirlo a esta cuenta.<br>¡Con tu presencia y cariño es más que suficiente!</p>
+        <p class="iban-note">¡Gracias!</p>
       </div>
 
 
