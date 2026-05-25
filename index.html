@@ -855,8 +855,7 @@ function descargarPDF(){
 
   // Obtener datos del resumen
   const nom = document.getElementById('s-title')?.textContent || '';
-  const bodyEl = document.getElementById('s-body');
-  const bodyTxt = bodyEl ? bodyEl.innerText : '';
+  const invitadoNom = (document.getElementById('i-nom')?.value || '').trim();
   const rows = [];
   document.querySelectorAll('#s-summary-rows .s-summary-row').forEach(row => {
     const name = row.querySelector('.s-summary-name')?.textContent?.trim() || '';
@@ -864,12 +863,12 @@ function descargarPDF(){
     if(name) rows.push({name, menu});
   });
 
-  // Cargar la foto del anillo
-  const srcImg = document.querySelector('.hdr-img');
+  // Cargar la foto de la barraca (siempre, independientemente del carrusel)
   const img = new Image();
+  const srcImg = { src: 'https://raw.githubusercontent.com/Cemaspe/Invitacion-boda/refs/heads/main/barraca.jpeg' };
 
   function drawCanvas() {
-    const PHOTO_H = 220;
+    const PHOTO_H = 360;
     const PAD = 36;
     const GOLD = '#D4A853';
     const WHITE = 'rgba(255,255,255,0.88)';
@@ -964,14 +963,20 @@ function descargarPDF(){
     ctx.fillStyle = DIM;
     ctx.font = 'italic 13px "Cormorant Garamond", serif';
     ctx.letterSpacing = '0px';
-    ctx.fillText('La Barraca del Palmar · Valencia', W/2, y + 16);
+    ctx.fillText('La Barraca del Palmar (Valencia) • 12:00h', W/2, y + 16);
     y += 32;
 
     // -- INTRO --
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
     ctx.font = 'italic 14px "Cormorant Garamond", serif';
-    ctx.fillText('Nos alegra enormemente contar contigo en este día tan especial.', W/2, y + 16);
-    y += 36;
+    const introBase = 'nos alegra enormemente contar contigo en este día tan especial.';
+    const introTxt = invitadoNom ? (invitadoNom + ', ' + introBase) : ('N' + introBase.slice(1));
+    const introLines = wrapText(ctx, introTxt, W - PAD*2);
+    introLines.forEach(line => {
+      ctx.fillText(line, W/2, y + 16);
+      y += 22;
+    });
+    y += 14;
 
     // -- DIVISOR --
     ctx.fillStyle = GOLD;
@@ -993,17 +998,6 @@ function descargarPDF(){
     titleLines.forEach(line => {
       ctx.fillText(line, W/2, y + 22);
       y += 28;
-    });
-    y += 8;
-
-    // -- MENSAJE --
-    ctx.fillStyle = 'rgba(255,255,255,0.65)';
-    ctx.font = 'italic 14px "Cormorant Garamond", serif';
-    ctx.letterSpacing = '0px';
-    const bodyLines = wrapText(ctx, bodyTxt.split('\n').join(' '), W - PAD*2);
-    bodyLines.forEach(line => {
-      ctx.fillText(line, W/2, y + 18);
-      y += 22;
     });
     y += 12;
 
