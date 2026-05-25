@@ -454,7 +454,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 
   <div id="success">
     <span class="s-ico" id="s-ico">🥂</span>
-    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre!</div>
+    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre a las 12h!</div>
     <p class="s-body" id="s-body"></p>
     <div class="saved-pill">✓ Confirmación registrada</div>
     <div class="s-summary" id="s-summary" style="display:none">
@@ -462,7 +462,17 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
       <div id="s-summary-rows"></div>
     </div>
     <div class="s-iban" id="s-iban" style="display:none">
-      <div class="s-iban-t">✦ CUENTA PARA REGALO</div>
+      <div class="s-iban-t" style="font-size:0;line-height:0;margin-bottom:0.1rem;">
+        <svg width="120" height="48" viewBox="0 0 140 56" fill="none" aria-hidden="true">
+          <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+          <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
+          <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+          <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+          <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
+        </svg>
+      </div>
       <div class="s-iban-n" id="iban-s" onclick="copyIBAN('iban-s')">ES11 1583 0001 1191 1447 7085</div>
       <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,.7);margin-top:4px;">TOCA PARA COPIAR</div>
     </div>
@@ -997,10 +1007,44 @@ function descargarPDF(){
 
     btn.innerHTML = orig;
     btn.disabled = false;
-    const link = document.createElement('a');
-    link.download = 'invitacion-cristina-y-pau.png';
-    link.href = finalCanvas.toDataURL('image/png');
-    link.click();
+
+    const filename = 'invitacion-cristina-y-pau.png';
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+    if(isIOS){
+      // iOS Safari ignora download="...": abrimos la imagen en una pestaña
+      // para que el usuario la guarde manteniendo pulsado.
+      finalCanvas.toBlob(function(blob){
+        const url = URL.createObjectURL(blob);
+        const win = window.open();
+        if(win){
+          win.document.write(
+            '<!doctype html><html><head><meta charset="utf-8">'+
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+            '<title>Tu invitación</title>'+
+            '<style>body{margin:0;background:#0a170e;display:flex;flex-direction:column;'+
+            'align-items:center;justify-content:center;min-height:100vh;padding:16px;'+
+            'font-family:-apple-system,sans-serif;color:#D4A853;}'+
+            'img{max-width:100%;height:auto;display:block;border:1px solid rgba(212,168,83,.2);}'+
+            'p{margin:14px 16px;font-size:14px;text-align:center;line-height:1.5;}</style>'+
+            '</head><body>'+
+            '<p>📷 Mantén pulsada la imagen y elige <b>“Guardar en Fotos”</b></p>'+
+            '<img src="'+url+'" alt="Invitación">'+
+            '</body></html>'
+          );
+          win.document.close();
+        } else {
+          window.location.href = url;
+        }
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+      }, 'image/png');
+    } else {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = finalCanvas.toDataURL('image/png');
+      link.click();
+    }
   }
 
   function wrapText(ctx, text, maxW) {
@@ -1109,11 +1153,11 @@ function mostrarExito(asist, nom, personas){
   if(asist==='Sí'){
     document.getElementById('s-ico').textContent='🥂';
     const total = personas.length;
-    document.getElementById('s-title').textContent='¡Nos vemos el 26 de septiembre!';
+    document.getElementById('s-title').textContent='¡Nos vemos el 26 de septiembre a las 12h!';
     document.getElementById('s-body').innerHTML=
       `¡Qué alegría, <em>${esc(nom)}</em>!`+
       (total>1?` Hemos registrado a <span class="s-gold">${total} personas</span>.`:' Tu confirmación ha quedado registrada.')+
-      `<br><span class="s-gold">¡Estamos deseando celebrarlo con vosotros!</span>`;
+      `<br><span class="s-gold">¡Estamos deseando celebrarlo contigo!</span>`;
     const rows = document.getElementById('s-summary-rows');
     rows.innerHTML = personas.map(p=>`
       <div class="s-summary-row">
