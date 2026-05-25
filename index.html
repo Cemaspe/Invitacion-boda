@@ -481,7 +481,7 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
 
   <div id="success">
     <span class="s-ico" id="s-ico">🥂</span>
-    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre a las 12:00h!</div>
+    <div class="s-title" id="s-title">¡Nos vemos el 26 de septiembre<br>a las 12:00h!</div>
     <p class="s-body" id="s-body"></p>
     <div class="saved-pill">✓ Confirmación registrada</div>
     <div class="s-summary" id="s-summary" style="display:none">
@@ -901,8 +901,8 @@ function descargarPDF(){
   const SCALE = 2;
   const W = 480;
 
-  // Obtener datos del resumen
-  const nom = document.getElementById('s-title')?.textContent || '';
+  // Obtener datos del resumen (innerText preserva saltos de <br> como \n)
+  const nom = (document.getElementById('s-title')?.innerText || '').trim();
   const invitadoNom = (document.getElementById('i-nom')?.value || '').trim();
   const rows = [];
   document.querySelectorAll('#s-summary-rows .s-summary-row').forEach(row => {
@@ -1059,17 +1059,21 @@ function descargarPDF(){
     }
 
     ctx.fillStyle = '#ffffff';
-    // Forzar una sola línea: ajustar font-size si no cabe
-    const maxTitleW = W - PAD*2;
-    let titleFs = 17;
     ctx.letterSpacing = '1px';
+    // El título puede llegar con saltos de línea (\n) — los respetamos
+    const maxTitleW = W - PAD*2;
+    const titleLines = nom.split(/\r?\n/).filter(Boolean);
+    let titleFs = 20;
     ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
-    while(ctx.measureText(nom).width > maxTitleW && titleFs > 10){
+    while(titleLines.some(l => ctx.measureText(l).width > maxTitleW) && titleFs > 11){
       titleFs -= 1;
       ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
     }
-    ctx.fillText(nom, W/2, y + titleFs + 4);
-    y += titleFs + 16;
+    titleLines.forEach(line => {
+      ctx.fillText(line, W/2, y + titleFs + 4);
+      y += titleFs + 10;
+    });
+    y += 8;
 
 
 
@@ -1256,10 +1260,10 @@ function mostrarExito(asist, nom, personas){
   if(asist==='Sí'){
     document.getElementById('s-ico').textContent='🥂';
     const total = personas.length;
-    document.getElementById('s-title').textContent='¡Nos vemos el 26 de septiembre a las 12:00h!';
+    document.getElementById('s-title').innerHTML='¡Nos vemos el 26 de septiembre<br>a las 12:00h!';
     document.getElementById('s-body').innerHTML=
-      `¡Qué alegría, <em>${esc(nom)}</em>! Nos hace muy felices que puedas acompañarnos,`+
-      (total>1?` y hemos registrado a <span class="s-gold">${total} personas</span>.`:'')+
+      `¡Qué alegría, <em>${esc(nom)}</em>!<br>Nos hace muy felices que puedas acompañarnos`+
+      (total>1?`, y hemos registrado a <span class="s-gold">${total} personas</span>.`:'.')+
       `<br><span class="s-gold">¡Estamos deseando celebrarlo contigo!</span>`;
     const rows = document.getElementById('s-summary-rows');
     rows.innerHTML = personas.map(p=>{
