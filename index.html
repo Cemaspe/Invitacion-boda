@@ -1059,14 +1059,27 @@ function descargarPDF(){
     // Empieza el bloque de texto bajo la foto
     y = PHOTO_H + 18;
 
-    // -- INTRO -- en dos frases separadas
+    // -- INTRO -- texto distinto según asista o no
     ctx.fillStyle = 'rgba(255,255,255,0.65)';
     ctx.font = 'italic 18px "Cormorant Garamond", serif';
-    const intro1 = invitadoNom
-      ? invitadoNom + ', nos alegra enormemente contar contigo'
-      : 'Nos alegra enormemente contar contigo';
-    const intro2 = 'en este día tan importante para nosotros.';
-    [intro1, intro2].forEach(frase => {
+    const asistioSi = (_asist === 'Sí');
+    let introFrases;
+    if(asistioSi){
+      introFrases = [
+        invitadoNom
+          ? invitadoNom + ', nos alegra enormemente contar contigo'
+          : 'Nos alegra enormemente contar contigo',
+        'en este día tan importante para nosotros.'
+      ];
+    } else {
+      introFrases = [
+        invitadoNom
+          ? invitadoNom + ', gracias por formar parte'
+          : 'Gracias por formar parte',
+        'de nuestra historia.'
+      ];
+    }
+    introFrases.forEach(frase => {
       wrapText(ctx, frase, W - PAD*2).forEach(line => {
         ctx.fillText(line, W/2, y + 20);
         y += 28;
@@ -1083,22 +1096,24 @@ function descargarPDF(){
       y += 12;
     }
 
-    ctx.fillStyle = '#ffffff';
-    ctx.letterSpacing = '1px';
-    // El título puede llegar con saltos de línea (\n) — los respetamos
-    const maxTitleW = W - PAD*2;
-    const titleLines = nom.split(/\r?\n/).filter(Boolean);
-    let titleFs = 20;
-    ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
-    while(titleLines.some(l => ctx.measureText(l).width > maxTitleW) && titleFs > 11){
-      titleFs -= 1;
+    if(asistioSi){
+      ctx.fillStyle = '#ffffff';
+      ctx.letterSpacing = '1px';
+      // El título puede llegar con saltos de línea (\n) — los respetamos
+      const maxTitleW = W - PAD*2;
+      const titleLines = nom.split(/\r?\n/).filter(Boolean);
+      let titleFs = 20;
       ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
+      while(titleLines.some(l => ctx.measureText(l).width > maxTitleW) && titleFs > 11){
+        titleFs -= 1;
+        ctx.font = 'normal 400 ' + titleFs + 'px "Cinzel", serif';
+      }
+      titleLines.forEach(line => {
+        ctx.fillText(line, W/2, y + titleFs + 4);
+        y += titleFs + 10;
+      });
+      y += 8;
     }
-    titleLines.forEach(line => {
-      ctx.fillText(line, W/2, y + titleFs + 4);
-      y += titleFs + 10;
-    });
-    y += 8;
 
 
 
