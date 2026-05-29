@@ -568,9 +568,14 @@ input,textarea,select{font-size:1rem!important;} /* prevent iOS zoom on focus */
     goToSlide((current + 1) % slides.length);
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
+  function startCarousel(){
+    const slides = getSlides();
+    if(slides.length < 2) return;
+    clearInterval(timer);
     timer = setInterval(nextSlide, INTERVAL);
-  });
+  }
+  if(document.readyState !== 'loading') startCarousel();
+  else document.addEventListener('DOMContentLoaded', startCarousel);
 })();
 
 // ===========================================
