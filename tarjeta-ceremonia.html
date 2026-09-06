@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarjeta ceremonia · Cris & Pau</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  /* Tokens copiados de index.html */
+  :root{
+    --gold:#D4A853;
+    --gold-soft:#F4D27A;
+    --green-1:#0c1610;
+    --green-2:#08120c;
+    --green-3:#070d09;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Lato',sans-serif;
+    background:var(--green-3);
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:28px 16px 60px;
+  }
+
+  .toolbar{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .toolbar button{
+    background:transparent;
+    border:1px solid rgba(212,168,83,.45);
+    color:var(--gold);
+    font-family:'Cinzel',serif;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    padding:11px 20px;
+    cursor:pointer;
+    transition:background .2s, border-color .2s;
+  }
+  .toolbar button:hover{background:rgba(212,168,83,.1);border-color:var(--gold);}
+  .toolbar .hint{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:13px;
+    color:rgba(255,255,255,.5);
+  }
+
+  /* ====== LA TARJETA ====== */
+  .tarjeta{
+    position:relative;
+    width:100%;
+    max-width:980px;
+    aspect-ratio:3 / 2;
+    overflow:hidden;
+    background:var(--green-2);
+    box-shadow:0 24px 80px rgba(0,0,0,.75);
+  }
+
+  /* Foto de fondo */
+  .tarjeta-foto{
+    position:absolute;
+    inset:0;
+    background:url('barraca.jpeg') center 45% / cover no-repeat;
+  }
+
+  /* Velo verde oscuro (mismo tinte que .bg-overlay del index) */
+  .tarjeta-velo{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 50%, rgba(8,18,12,.35), rgba(8,18,12,.72) 70%, rgba(7,13,9,.86) 100%),
+      linear-gradient(to bottom, rgba(7,13,9,.55) 0%, rgba(7,13,9,.30) 45%, rgba(7,13,9,.72) 100%);
+  }
+
+  /* Marco dorado doble, pegado al borde */
+  .marco-ext{
+    position:absolute;
+    inset:0;
+    border:1.5px solid rgba(212,168,83,.75);
+    pointer-events:none;
+  }
+  .marco-int{
+    position:absolute;
+    inset:12px;
+    border:1px solid rgba(212,168,83,.32);
+    pointer-events:none;
+  }
+  /* Esquinas en L (equivalentes a .cn del index) */
+  .cn{
+    position:absolute;
+    width:26px;
+    height:26px;
+    border-color:var(--gold);
+    border-style:solid;
+    opacity:.85;
+    pointer-events:none;
+  }
+  .cn.tl{top:22px;left:22px;border-width:1.5px 0 0 1.5px;}
+  .cn.tr{top:22px;right:22px;border-width:1.5px 1.5px 0 0;}
+  .cn.bl{bottom:22px;left:22px;border-width:0 0 1.5px 1.5px;}
+  .cn.br{bottom:22px;right:22px;border-width:0 1.5px 1.5px 0;}
+
+  /* Contenido centrado */
+  .contenido{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:clamp(28px, 5vw, 56px);
+    gap:0;
+  }
+
+  .orn{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(10px, 1.2vw, 13px);
+    letter-spacing:clamp(8px, 1.1vw, 13px);
+    color:var(--gold);
+    opacity:.92;
+    text-indent:clamp(8px, 1.1vw, 13px); /* compensa el letter-spacing final */
+  }
+
+  .nombres{
+    font-family:'Cinzel',serif;
+    font-weight:400;
+    font-size:clamp(34px, 7.2vw, 82px);
+    letter-spacing:clamp(4px, 0.9vw, 11px);
+    line-height:1.05;
+    color:#fff;
+    white-space:nowrap;
+    text-indent:clamp(4px, 0.9vw, 11px);
+    margin:clamp(14px, 2.2vw, 26px) 0;
+    text-shadow:0 2px 24px rgba(0,0,0,.55);
+  }
+  .nombres em{
+    color:var(--gold);
+    font-style:normal;
+  }
+
+  /* Anillos SVG (idénticos a los del index.html) */
+  .anillos{
+    margin-top:clamp(18px, 3vw, 34px);
+    line-height:0;
+  }
+  .anillos svg{
+    width:clamp(150px, 22vw, 240px);
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 2px 12px rgba(0,0,0,.5));
+  }
+
+  .fecha{
+    margin-top:clamp(18px, 3vw, 32px);
+    display:inline-block;
+    border:1.5px solid rgba(212,168,83,.65);
+    padding:clamp(7px, 1vw, 11px) clamp(16px, 2.6vw, 32px);
+    font-family:'Cinzel',serif;
+    font-weight:600;
+    font-size:clamp(9px, 1.15vw, 13px);
+    letter-spacing:clamp(3px, 0.45vw, 5px);
+    color:var(--gold);
+    text-indent:clamp(3px, 0.45vw, 5px);
+    background:rgba(7,13,9,.28);
+  }
+
+  .lugar{
+    margin-top:clamp(10px, 1.6vw, 18px);
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(13px, 1.75vw, 21px);
+    color:rgba(255,255,255,.92);
+    text-shadow:0 1px 10px rgba(0,0,0,.6);
+  }
+
+  /* ====== IMPRESIÓN ====== */
+  @page{ size:A4 landscape; margin:0; }
+  @media print{
+    body{background:#fff;padding:0;min-height:auto;display:block;}
+    .toolbar{display:none !important;}
+    .tarjeta{
+      max-width:none;
+      width:297mm;
+      height:210mm;
+      aspect-ratio:auto;
+      box-shadow:none;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="descargarPNG()">⬇ Descargar PNG</button>
+  <button onclick="window.print()">🖨 Imprimir / PDF</button>
+  <span class="hint">A4 apaisado · 3:2</span>
+</div>
+
+<div class="tarjeta" id="tarjeta">
+  <div class="tarjeta-foto"></div>
+  <div class="tarjeta-velo"></div>
+
+  <div class="marco-ext"></div>
+  <div class="marco-int"></div>
+  <div class="cn tl"></div><div class="cn tr"></div>
+  <div class="cn bl"></div><div class="cn br"></div>
+
+  <div class="contenido">
+    <span class="orn">✦ · · · · · ✦</span>
+
+    <div class="nombres">Cris <em>&amp;</em> Pau</div>
+
+    <span class="orn">✦ · · · · · ✦</span>
+
+    <div class="anillos">
+      <svg viewBox="0 0 140 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 28 h20 M110 28 h20" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+        <circle cx="6" cy="28" r="1.5" fill="#D4A853"/>
+        <circle cx="134" cy="28" r="1.5" fill="#D4A853"/>
+        <circle cx="58" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+        <circle cx="80" cy="28" r="16" stroke="#D4A853" stroke-width="1.5"/>
+        <path d="M80 6 l4 5 l-4 6 l-4 -6 z" fill="#D4A853" stroke="#F4D27A" stroke-width="0.5"/>
+        <path d="M80 6 l4 5 l-4 6" fill="rgba(255,255,255,.35)"/>
+      </svg>
+    </div>
+
+    <div class="fecha">26 DE SEPTIEMBRE DE 2026</div>
+    <div class="lugar">La Barraca del Palmar (Valencia) · 12:00h</div>
+  </div>
+</div>
+
+<script>
+function descargarPNG(){
+  const el = document.getElementById('tarjeta');
+  const btns = document.querySelector('.toolbar');
+  btns.style.visibility = 'hidden';
+  html2canvas(el, {
+    scale: 3,
+    useCORS: true,
+    allowTaint: false,
+    backgroundColor: '#08120c'
+  }).then(canvas => {
+    btns.style.visibility = 'visible';
+    const link = document.createElement('a');
+    link.download = 'tarjeta-ceremonia-cris-y-pau.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }).catch(err => {
+    btns.style.visibility = 'visible';
+    console.error(err);
+    alert('No se pudo generar el PNG. Usa "Imprimir / PDF" o una captura de pantalla.');
+  });
+}
+</script>
+
+</body>
+</html>
