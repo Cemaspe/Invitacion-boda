@@ -112,11 +112,18 @@
     box-shadow:0 24px 80px rgba(0,0,0,.75);
   }
 
-  /* Foto de fondo */
+  /* Foto de fondo.
+     Va como <img> y no como background-image a propósito: al imprimir, Chrome
+     remuestrea los fondos CSS al tamaño de pantalla, mientras que un <img> lo
+     incrusta a su resolución nativa (3024x4032 = 366 ppp en A5). */
   .tarjeta-foto{
     position:absolute;
     inset:0;
-    background:url('https://raw.githubusercontent.com/Cemaspe/Invitacion-boda/refs/heads/main/barraca.jpeg') center 45% / cover no-repeat;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 45%;
+    display:block;
   }
 
   /* Velo verde oscuro (mismo tinte que .bg-overlay del index) */
@@ -247,6 +254,14 @@
       -webkit-print-color-adjust:exact;
       print-color-adjust:exact;
     }
+
+    /* CLAVE PARA LA NITIDEZ.
+       filter y text-shadow obligan al navegador a rasterizar el elemento a
+       resolución de pantalla en vez de imprimirlo como vector. Con esto los
+       anillos SVG y los textos salen nítidos a cualquier tamaño. */
+    .anillos svg{ filter:none !important; }
+    .nombres, .lugar{ text-shadow:none !important; }
+    .tarjeta *{ box-shadow:none !important; }
     body.print-a5 .tarjeta{ width:210mm; height:148mm; }
     body.print-a4 .tarjeta{ width:297mm; height:210mm; }
 
@@ -279,7 +294,7 @@
   <button onclick="imprimir('a5x2')">🖨 PDF · 2 A5 en una A4</button>
   <button onclick="imprimir('a5')">🖨 PDF A5</button>
   <button onclick="imprimir('a4')">🖨 PDF A4</button>
-  <span class="hint">Apaisado · proporción A (1:√2)</span>
+  <span class="hint">En el diálogo de impresión: Márgenes «Ninguno» y activa «Gráficos de fondo»</span>
 
   <div class="control-velo">
     <label for="velo">Velo</label>
@@ -293,7 +308,10 @@
 <div id="hoja-a5x2"></div>
 
 <div class="tarjeta" id="tarjeta">
-  <div class="tarjeta-foto"></div>
+  <img class="tarjeta-foto"
+       src="https://raw.githubusercontent.com/Cemaspe/Invitacion-boda/refs/heads/main/barraca.jpeg"
+       crossorigin="anonymous"
+       alt="">
   <div class="tarjeta-velo"></div>
 
   <div class="marco-ext"></div>
