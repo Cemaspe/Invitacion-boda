@@ -14,6 +14,9 @@
     --green-1:#0c1610;
     --green-2:#08120c;
     --green-3:#070d09;
+    /* Lo mueve el deslizador de la barra de herramientas.
+       Vive en :root para que herede también en las copias clonadas al imprimir. */
+    --velo-opacidad:1;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
@@ -56,6 +59,47 @@
     color:rgba(255,255,255,.5);
   }
 
+  /* Deslizador del velo */
+  .control-velo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid rgba(212,168,83,.28);
+    padding:9px 16px;
+  }
+  .control-velo label{
+    font-family:'Cinzel',serif;
+    font-size:9px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  .control-velo input[type=range]{
+    width:170px;
+    accent-color:var(--gold);
+    cursor:pointer;
+  }
+  .control-velo output{
+    font-family:'Cormorant Garamond',serif;
+    font-size:15px;
+    color:rgba(255,255,255,.85);
+    min-width:44px;
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+  }
+  .control-velo .reset{
+    background:none;
+    border:none;
+    color:rgba(255,255,255,.4);
+    font-size:15px;
+    line-height:1;
+    padding:2px 4px;
+    cursor:pointer;
+    letter-spacing:0;
+  }
+  .control-velo .reset:hover{color:var(--gold);background:none;}
+
   /* ====== LA TARJETA ====== */
   /* Proporción A-series apaisada (1:√2) — vale igual para A4 y A5, sin bandas al imprimir */
   .tarjeta{
@@ -79,6 +123,7 @@
   .tarjeta-velo{
     position:absolute;
     inset:0;
+    opacity:var(--velo-opacidad);
     background:
       radial-gradient(ellipse 70% 55% at 50% 50%, rgba(8,18,12,.35), rgba(8,18,12,.72) 70%, rgba(7,13,9,.86) 100%),
       linear-gradient(to bottom, rgba(7,13,9,.55) 0%, rgba(7,13,9,.30) 45%, rgba(7,13,9,.72) 100%);
@@ -235,6 +280,13 @@
   <button onclick="imprimir('a5')">🖨 PDF A5</button>
   <button onclick="imprimir('a4')">🖨 PDF A4</button>
   <span class="hint">Apaisado · proporción A (1:√2)</span>
+
+  <div class="control-velo">
+    <label for="velo">Velo</label>
+    <input type="range" id="velo" min="0" max="100" step="1" value="100">
+    <output id="velo-valor">100%</output>
+    <button class="reset" onclick="resetVelo()" title="Volver a 100%">↺</button>
+  </div>
 </div>
 
 <!-- Contenedor de impresión con las dos copias A5 (lo rellena el JS) -->
@@ -274,6 +326,28 @@
 </div>
 
 <script>
+// ===== Deslizador del velo =====
+// Escribe la variable en :root, así la heredan tanto la tarjeta en pantalla
+// como las copias clonadas al imprimir y el canvas de html2canvas.
+const velo      = document.getElementById('velo');
+const veloValor = document.getElementById('velo-valor');
+
+function aplicarVelo(porcentaje){
+  document.documentElement.style.setProperty('--velo-opacidad', porcentaje / 100);
+  veloValor.textContent = porcentaje + '%';
+  velo.value = porcentaje;
+  try{ localStorage.setItem('tarjeta-velo', porcentaje); }catch(_){}
+}
+
+velo.addEventListener('input', e => aplicarVelo(Number(e.target.value)));
+function resetVelo(){ aplicarVelo(100); }
+
+// Recupera el último valor usado
+try{
+  const guardado = localStorage.getItem('tarjeta-velo');
+  if(guardado !== null) aplicarVelo(Number(guardado));
+}catch(_){}
+
 // Ancho en píxeles a 300 ppp de cada formato apaisado
 const FORMATOS = {
   a5: { ancho: 2480, etiqueta: 'A5' },   // 210mm a 300ppp
