@@ -187,8 +187,11 @@
     text-shadow:0 1px 10px rgba(0,0,0,.6);
   }
 
+  /* Hoja con las dos copias A5 — solo se usa al imprimir en modo a5x2 */
+  #hoja-a5x2{ display:none; }
+
   /* ====== IMPRESIÓN ====== */
-  /* El tamaño de página lo inyecta el JS en #page-size según A5 o A4 */
+  /* El tamaño de página lo inyecta el JS en #page-size según el formato */
   @media print{
     body{background:#fff;padding:0;min-height:auto;display:block;}
     .toolbar{display:none !important;}
@@ -201,6 +204,23 @@
     }
     body.print-a5 .tarjeta{ width:210mm; height:148mm; }
     body.print-a4 .tarjeta{ width:297mm; height:210mm; }
+
+    /* --- Dos A5 apaisadas en una A4 vertical --- */
+    body.print-a5x2 #tarjeta{ display:none; }
+    body.print-a5x2 #hoja-a5x2{
+      display:block;
+      width:210mm;
+      height:297mm;
+    }
+    body.print-a5x2 #hoja-a5x2 .tarjeta{
+      width:210mm;
+      height:148.5mm;   /* 297 / 2 exacto */
+      display:block;
+    }
+    /* Línea de corte entre las dos */
+    body.print-a5x2 #hoja-a5x2 .tarjeta:first-child{
+      border-bottom:0.4mm dashed rgba(255,255,255,.35);
+    }
   }
 </style>
 </head>
@@ -211,10 +231,14 @@
 <div class="toolbar">
   <button onclick="descargarPNG('a5')">⬇ PNG A5</button>
   <button onclick="descargarPNG('a4')">⬇ PNG A4</button>
+  <button onclick="imprimir('a5x2')">🖨 PDF · 2 A5 en una A4</button>
   <button onclick="imprimir('a5')">🖨 PDF A5</button>
   <button onclick="imprimir('a4')">🖨 PDF A4</button>
   <span class="hint">Apaisado · proporción A (1:√2)</span>
 </div>
+
+<!-- Contenedor de impresión con las dos copias A5 (lo rellena el JS) -->
+<div id="hoja-a5x2"></div>
 
 <div class="tarjeta" id="tarjeta">
   <div class="tarjeta-foto"></div>
@@ -257,14 +281,36 @@ const FORMATOS = {
 };
 
 function imprimir(formato){
-  const mm = formato === 'a4' ? 'A4' : 'A5';
-  document.getElementById('page-size').textContent =
-    '@page{ size:' + mm + ' landscape; margin:0; }';
-  document.body.classList.remove('print-a5','print-a4');
+  const hoja = document.getElementById('hoja-a5x2');
+  const pageStyle = document.getElementById('page-size');
+
+  if(formato === 'a5x2'){
+    // A4 VERTICAL con dos A5 apaisadas apiladas (148,5mm cada una)
+    pageStyle.textContent = '@page{ size:A4 portrait; margin:0; }';
+    hoja.innerHTML = '';
+    const original = document.getElementById('tarjeta');
+    for(let i = 0; i < 2; i++){
+      const copia = original.cloneNode(true);
+      copia.removeAttribute('id');
+      hoja.appendChild(copia);
+    }
+  } else {
+    const mm = formato === 'a4' ? 'A4' : 'A5';
+    pageStyle.textContent = '@page{ size:' + mm + ' landscape; margin:0; }';
+    hoja.innerHTML = '';
+  }
+
+  document.body.classList.remove('print-a5','print-a4','print-a5x2');
   document.body.classList.add('print-' + formato);
   // Deja que el navegador aplique el @page nuevo antes de abrir el diálogo
   setTimeout(() => window.print(), 60);
 }
+
+// Limpia las copias al cerrar el diálogo de impresión
+window.addEventListener('afterprint', () => {
+  document.getElementById('hoja-a5x2').innerHTML = '';
+  document.body.classList.remove('print-a5','print-a4','print-a5x2');
+});
 
 function descargarPNG(formato){
   const cfg = FORMATOS[formato] || FORMATOS.a5;
