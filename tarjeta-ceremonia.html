@@ -57,11 +57,12 @@
   }
 
   /* ====== LA TARJETA ====== */
+  /* Proporción A-series apaisada (1:√2) — vale igual para A4 y A5, sin bandas al imprimir */
   .tarjeta{
     position:relative;
     width:100%;
     max-width:980px;
-    aspect-ratio:3 / 2;
+    aspect-ratio:297 / 210;
     overflow:hidden;
     background:var(--green-2);
     box-shadow:0 24px 80px rgba(0,0,0,.75);
@@ -187,28 +188,32 @@
   }
 
   /* ====== IMPRESIÓN ====== */
-  @page{ size:A4 landscape; margin:0; }
+  /* El tamaño de página lo inyecta el JS en #page-size según A5 o A4 */
   @media print{
     body{background:#fff;padding:0;min-height:auto;display:block;}
     .toolbar{display:none !important;}
     .tarjeta{
       max-width:none;
-      width:297mm;
-      height:210mm;
       aspect-ratio:auto;
       box-shadow:none;
       -webkit-print-color-adjust:exact;
       print-color-adjust:exact;
     }
+    body.print-a5 .tarjeta{ width:210mm; height:148mm; }
+    body.print-a4 .tarjeta{ width:297mm; height:210mm; }
   }
 </style>
 </head>
 <body>
 
+<style id="page-size">@page{ size:A5 landscape; margin:0; }</style>
+
 <div class="toolbar">
-  <button onclick="descargarPNG()">⬇ Descargar PNG</button>
-  <button onclick="window.print()">🖨 Imprimir / PDF</button>
-  <span class="hint">A4 apaisado · 3:2</span>
+  <button onclick="descargarPNG('a5')">⬇ PNG A5</button>
+  <button onclick="descargarPNG('a4')">⬇ PNG A4</button>
+  <button onclick="imprimir('a5')">🖨 PDF A5</button>
+  <button onclick="imprimir('a4')">🖨 PDF A4</button>
+  <span class="hint">Apaisado · proporción A (1:√2)</span>
 </div>
 
 <div class="tarjeta" id="tarjeta">
@@ -245,19 +250,39 @@
 </div>
 
 <script>
-function descargarPNG(){
+// Ancho en píxeles a 300 ppp de cada formato apaisado
+const FORMATOS = {
+  a5: { ancho: 2480, etiqueta: 'A5' },   // 210mm a 300ppp
+  a4: { ancho: 3508, etiqueta: 'A4' }    // 297mm a 300ppp
+};
+
+function imprimir(formato){
+  const mm = formato === 'a4' ? 'A4' : 'A5';
+  document.getElementById('page-size').textContent =
+    '@page{ size:' + mm + ' landscape; margin:0; }';
+  document.body.classList.remove('print-a5','print-a4');
+  document.body.classList.add('print-' + formato);
+  // Deja que el navegador aplique el @page nuevo antes de abrir el diálogo
+  setTimeout(() => window.print(), 60);
+}
+
+function descargarPNG(formato){
+  const cfg = FORMATOS[formato] || FORMATOS.a5;
   const el = document.getElementById('tarjeta');
   const btns = document.querySelector('.toolbar');
+  // La escala sale del ancho real en pantalla, así el PNG sale a 300 ppp exactos
+  const escala = cfg.ancho / el.getBoundingClientRect().width;
+
   btns.style.visibility = 'hidden';
   html2canvas(el, {
-    scale: 3,
+    scale: escala,
     useCORS: true,
     allowTaint: false,
     backgroundColor: '#08120c'
   }).then(canvas => {
     btns.style.visibility = 'visible';
     const link = document.createElement('a');
-    link.download = 'tarjeta-ceremonia-cris-y-pau.png';
+    link.download = 'tarjeta-ceremonia-cris-y-pau-' + cfg.etiqueta + '.png';
     link.href = canvas.toDataURL('image/png');
     document.body.appendChild(link);
     link.click();
@@ -265,7 +290,7 @@ function descargarPNG(){
   }).catch(err => {
     btns.style.visibility = 'visible';
     console.error(err);
-    alert('No se pudo generar el PNG. Usa "Imprimir / PDF" o una captura de pantalla.');
+    alert('No se pudo generar el PNG (el navegador bloquea la foto externa al abrir el fichero en local).\n\nUsa "PDF ' + cfg.etiqueta + '" o abre la tarjeta desde:\nhttps://cemaspe.github.io/Invitacion-boda/tarjeta-ceremonia.html');
   });
 }
 </script>
